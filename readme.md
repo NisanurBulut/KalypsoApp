@@ -5,6 +5,17 @@ If you like or are using this project to learn or start your solution, please gi
 
 <hr/>
 
+### Packages
+
+<ul>
+<li>Microsoft.EntityFrameworkCore</li>
+<li>Microsoft.EntityFrameworkCore.Design</li>
+<li>Microsoft.EntityFrameworkCore.Sqlite</li>
+<li>Microsoft.EntityFrameworkCore.Sqlite.Core</li>
+</ul>
+
+<hr/>
+
 ### Actions
 
 <table>
