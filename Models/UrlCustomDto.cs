@@ -2,13 +2,12 @@
 
 namespace KalypsoApp.Models
 {
-    public class UrlDto
+    public class UrlCustomDto
     {
-        public UrlDto()
-        {
-
-        }
         [Required]
         public string Url { get; set; } = "";
+        [Required]
+        [MaxLength(6)]
+        public string UrlCustomPart { get; set; } = "";
     }
 }
