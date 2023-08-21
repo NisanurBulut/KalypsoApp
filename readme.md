@@ -60,7 +60,7 @@ If you like or are using this project to learn or start your solution, please gi
 <tbody>
 <tr>
 <td>Swagger Web Based Editor</td>
-<td>Minimal API</td>
+<td>DotNet Core Minimal API</td>
 <td>SQLite</td>
 </tr>
 </tbody>
