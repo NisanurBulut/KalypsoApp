@@ -11,23 +11,27 @@ If you like or are using this project to learn or start your solution, please gi
   <tr>
     <th>shortenurl</th>
     <td>POST</td>
-    <td> <ol>
+    <td>
+    <ol>
     <li>url:string</li>
-    <li>urlCustomPart:string</li></ol> </td>
+    <li>urlCustomPart:string</li></ol>
+    </td>
     <td>return shorten http link according to custom url input</td>
   </tr>
   <th>shorturl</th>
     <td>POST</td>
-    <td> <ol>
+    <td> 
+    <ol>
     <li>url:string</li>
-    </td
+    </ol>
+    </td>
     <td>return shorten http link</td>
   <tr>
     <th>getlongurl</th>
     <td>GET</td>
     <td> <ol>
-    <li>url:string</li>
-    </td
+    <li>url:string</li></ol>
+    </td>
     <td>return original url address according to url param</td>
   </tr>
 </table>
