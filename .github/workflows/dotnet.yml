@@ -1,0 +1,53 @@
+# Builds and tests the Kalypso API, the shared contracts and the client logic (src/ + tests/), then builds the
+# MAUI app for Windows. The legacy API in legacy/KalypsoApp is .NET 7 and is not built by CI.
+
+name: .NET CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 10.0.x
+    - run: dotnet test tests/Kalypso.Api.Tests --configuration Release
+    - run: dotnet test tests/Kalypso.Client.Tests --configuration Release
+
+  maui:
+    # The MAUI workload is only installed here, so the jobs above stay fast.
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 10.0.x
+    - run: dotnet workload install maui
+    - run: dotnet build src/Kalypso.Maui --configuration Release --framework net10.0-windows10.0.19041.0
+
+  label-hotfix:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Label hotfix PR
+        if: github.event_name == 'pull_request' && contains(github.head_ref, 'hotfix')
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh api repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/labels -f "labels[]=bug"
+      - name: Label dev PR
+        if: github.event_name == 'pull_request' && contains(github.head_ref, 'dev')
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh api repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/labels -f "labels[]=enhancement"
+      - name: Label major PR
+        if: github.event_name == 'pull_request' && contains(github.head_ref, 'major')
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh api repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/labels -f "labels[]=breaking"
