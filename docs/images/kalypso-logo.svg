@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img" aria-label="Kalypso logo">
+  <defs>
+    <linearGradient id="sea" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1E6FFF"/>
+      <stop offset="1" stop-color="#00D4C8"/>
+    </linearGradient>
+    <linearGradient id="sun" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFD166"/>
+      <stop offset="1" stop-color="#FF5E6C"/>
+    </linearGradient>
+    <clipPath id="tile"><rect width="256" height="256" rx="58"/></clipPath>
+  </defs>
+  <g clip-path="url(#tile)">
+    <rect width="256" height="256" fill="url(#sea)"/>
+    <circle cx="128" cy="104" r="62" fill="url(#sun)"/>
+    <g transform="rotate(-40 128 100)" fill="none" stroke="#FFFFFF" stroke-width="15" stroke-linecap="round">
+      <rect x="62" y="78" width="80" height="44" rx="22"/>
+      <rect x="114" y="78" width="80" height="44" rx="22"/>
+    </g>
+    <path d="M0 168 C40 150 80 186 128 168 S216 150 256 170 V256 H0 Z" fill="#00D4C8" fill-opacity="0.6"/>
+    <path d="M0 194 C48 176 88 212 136 194 S220 178 256 196 V256 H0 Z" fill="#0A3FB8" fill-opacity="0.9"/>
+    <path d="M0 220 C50 204 96 236 144 220 S224 206 256 222 V256 H0 Z" fill="#0B1F4B"/>
+  </g>
+</svg>

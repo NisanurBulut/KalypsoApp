@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <!-- Kalypso palette: Aegean sea, sunset and a sandy beach. -->
+    <Color x:Key="Navy">#0B1F4B</Color>
+    <Color x:Key="Aegean">#1E6FFF</Color>
+    <Color x:Key="Turquoise">#00D4C8</Color>
+    <Color x:Key="Coral">#FF5E6C</Color>
+    <Color x:Key="Sunset">#FF9F1C</Color>
+    <Color x:Key="Sun">#FFD166</Color>
+    <Color x:Key="Magenta">#C724B1</Color>
+    <Color x:Key="Sand">#FFF4E0</Color>
+    <Color x:Key="Ink">#12254D</Color>
+    <Color x:Key="Muted">#6B7A99</Color>
+    <Color x:Key="FieldFill">#F1F6FF</Color>
+    <Color x:Key="Success">#0FB87F</Color>
+
+    <!-- Hero banner: deep sea to open water. -->
+    <LinearGradientBrush x:Key="HeroGradient" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#0B1F4B" Offset="0.0" />
+        <GradientStop Color="#1E6FFF" Offset="0.6" />
+        <GradientStop Color="#00D4C8" Offset="1.0" />
+    </LinearGradientBrush>
+
+    <!-- History banner: a sunset. -->
+    <LinearGradientBrush x:Key="SunsetGradient" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#C724B1" Offset="0.0" />
+        <GradientStop Color="#FF5E6C" Offset="0.55" />
+        <GradientStop Color="#FF9F1C" Offset="1.0" />
+    </LinearGradientBrush>
+
+    <!-- Settings banner: lagoon. -->
+    <LinearGradientBrush x:Key="LagoonGradient" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#00B8AD" Offset="0.0" />
+        <GradientStop Color="#1E6FFF" Offset="1.0" />
+    </LinearGradientBrush>
+
+    <!-- Main call-to-action button. -->
+    <LinearGradientBrush x:Key="CoralGradient" StartPoint="0,0" EndPoint="1,0">
+        <GradientStop Color="#FF5E6C" Offset="0.0" />
+        <GradientStop Color="#FF9F1C" Offset="1.0" />
+    </LinearGradientBrush>
+
+    <!-- The "your link is ready" card. -->
+    <LinearGradientBrush x:Key="ResultGradient" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#7B2FF7" Offset="0.0" />
+        <GradientStop Color="#1E6FFF" Offset="0.55" />
+        <GradientStop Color="#00D4C8" Offset="1.0" />
+    </LinearGradientBrush>
+</ResourceDictionary>

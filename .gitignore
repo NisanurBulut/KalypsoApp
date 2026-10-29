@@ -361,3 +361,7 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+# Local SQLite databases of the new API (the legacy ones in legacy/ stay tracked)
+*.db
+*.db-shm
+*.db-wal

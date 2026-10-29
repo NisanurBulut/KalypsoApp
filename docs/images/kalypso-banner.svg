@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 170" width="880" height="170" role="img" aria-label="Kalypso - shorten links, set sail">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0B1F4B"/>
+      <stop offset="0.6" stop-color="#1E6FFF"/>
+      <stop offset="1" stop-color="#00D4C8"/>
+    </linearGradient>
+    <linearGradient id="sea" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1E6FFF"/>
+      <stop offset="1" stop-color="#00D4C8"/>
+    </linearGradient>
+    <linearGradient id="sun" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFD166"/>
+      <stop offset="1" stop-color="#FF5E6C"/>
+    </linearGradient>
+    <linearGradient id="sunset" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#C724B1"/>
+      <stop offset="0.55" stop-color="#FF5E6C"/>
+      <stop offset="1" stop-color="#FF9F1C"/>
+    </linearGradient>
+    <clipPath id="card"><rect width="880" height="170" rx="22"/></clipPath>
+    <clipPath id="tile"><rect width="256" height="256" rx="58"/></clipPath>
+  </defs>
+
+  <g clip-path="url(#card)">
+    <rect width="880" height="170" fill="url(#bg)"/>
+
+    <!-- big sun peeking over the waves on the right -->
+    <circle cx="760" cy="112" r="92" fill="url(#sun)" fill-opacity="0.9"/>
+    <path d="M440 146 C520 122 580 168 660 146 S790 122 880 148 V170 H440 Z" fill="#00D4C8" fill-opacity="0.55"/>
+    <path d="M400 158 C490 138 560 178 650 158 S800 140 880 160 V170 H400 Z" fill="#0A3FB8" fill-opacity="0.85"/>
+    <path d="M0 166 C60 156 120 176 190 166 S320 156 400 168 V170 H0 Z" fill="#0B1F4B" fill-opacity="0.6"/>
+
+    <!-- short link: a long dotted path that ends in a short one -->
+    <g fill="none" stroke="#FFFFFF" stroke-opacity="0.6" stroke-width="3" stroke-linecap="round" stroke-dasharray="0.1 9">
+      <path d="M300 60 C380 20 440 100 520 56 S600 30 640 50"/>
+    </g>
+    <g fill="#FFFFFF" fill-opacity="0.9">
+      <circle cx="300" cy="60" r="6"/>
+      <circle cx="640" cy="50" r="6"/>
+    </g>
+
+    <!-- logo tile -->
+    <g transform="translate(28 22) scale(0.5)">
+      <g clip-path="url(#tile)">
+        <rect width="256" height="256" fill="url(#sea)"/>
+        <circle cx="128" cy="104" r="62" fill="url(#sun)"/>
+        <g transform="rotate(-40 128 100)" fill="none" stroke="#FFFFFF" stroke-width="15" stroke-linecap="round">
+          <rect x="62" y="78" width="80" height="44" rx="22"/>
+          <rect x="114" y="78" width="80" height="44" rx="22"/>
+        </g>
+        <path d="M0 168 C40 150 80 186 128 168 S216 150 256 170 V256 H0 Z" fill="#00D4C8" fill-opacity="0.6"/>
+        <path d="M0 194 C48 176 88 212 136 194 S220 178 256 196 V256 H0 Z" fill="#0A3FB8" fill-opacity="0.9"/>
+        <path d="M0 220 C50 204 96 236 144 220 S224 206 256 222 V256 H0 Z" fill="#0B1F4B"/>
+      </g>
+    </g>
+  </g>
+
+  <text x="176" y="82" fill="#FFFFFF" font-family="Segoe UI, Verdana, DejaVu Sans, sans-serif" font-size="52" font-weight="700">Kalypso</text>
+  <text x="178" y="116" fill="#BFF7F2" font-family="Segoe UI, Verdana, DejaVu Sans, sans-serif" font-size="20">Shorten links. Set sail.</text>
+  <rect x="178" y="128" width="150" height="6" rx="3" fill="url(#sunset)"/>
+</svg>
