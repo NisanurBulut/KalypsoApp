@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell x:Class="Kalypso.Maui.AppShell"
+       xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:pages="clr-namespace:Kalypso.Maui.Pages"
+       Shell.FlyoutBehavior="Disabled"
+       Shell.NavBarIsVisible="False"
+       Shell.BackgroundColor="{StaticResource Navy}"
+       Shell.TabBarBackgroundColor="White"
+       Shell.TabBarTitleColor="{StaticResource Coral}"
+       Shell.TabBarUnselectedColor="{StaticResource Muted}">
+
+    <TabBar>
+        <ShellContent Title="Shorten" Icon="tab_shorten.png" Route="shorten"
+                      ContentTemplate="{DataTemplate pages:ShortenPage}" />
+        <ShellContent Title="History" Icon="tab_history.png" Route="history"
+                      ContentTemplate="{DataTemplate pages:HistoryPage}" />
+        <ShellContent Title="Settings" Icon="tab_settings.png" Route="settings"
+                      ContentTemplate="{DataTemplate pages:SettingsPage}" />
+    </TabBar>
+</Shell>

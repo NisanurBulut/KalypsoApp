@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="Kalypso.Maui.Pages.HistoryPage"
+             x:Name="HistoryRoot"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Kalypso.Client.ViewModels;assembly=Kalypso.Client"
+             xmlns:contracts="clr-namespace:Kalypso.Contracts;assembly=Kalypso.Contracts"
+             x:DataType="vm:HistoryViewModel"
+             Title="History"
+             Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="Auto,Auto,*">
+
+        <!-- Sunset banner with totals -->
+        <Grid Background="{StaticResource SunsetGradient}" Padding="24,52,16,26"
+              ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto,Auto" RowSpacing="4">
+            <Label Text="Your voyages" FontSize="30" FontAttributes="Bold" TextColor="White" />
+            <Label Grid.Row="1" Text="Every link you have shortened on this device" FontSize="13" TextColor="#FFE9D6" />
+            <HorizontalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Start">
+                <ImageButton Source="icon_refresh.png" WidthRequest="44" HeightRequest="44" Padding="10"
+                             Command="{Binding RefreshCommand}" />
+                <ImageButton Source="icon_trash_white.png" WidthRequest="44" HeightRequest="44" Padding="10"
+                             Clicked="OnClearClicked" />
+            </HorizontalStackLayout>
+            <HorizontalStackLayout Grid.Row="2" Grid.ColumnSpan="2" Spacing="10" Margin="0,12,0,0">
+                <Border Style="{StaticResource Chip}">
+                    <Label Text="{Binding LinkCountText}" TextColor="White" FontAttributes="Bold" />
+                </Border>
+                <Border Style="{StaticResource Chip}">
+                    <Label Text="{Binding TotalClicksText}" TextColor="White" FontAttributes="Bold" />
+                </Border>
+            </HorizontalStackLayout>
+        </Grid>
+
+        <Label Grid.Row="1" Text="{Binding Message}" IsVisible="{Binding HasMessage}"
+               Padding="20,10" TextColor="{StaticResource Magenta}" FontAttributes="Bold" />
+
+        <RefreshView Grid.Row="2" Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}"
+                     RefreshColor="{StaticResource Coral}">
+            <CollectionView ItemsSource="{Binding Items}" SelectionMode="None" Margin="16,8,16,0">
+                <CollectionView.EmptyView>
+                    <VerticalStackLayout Padding="24,36" Spacing="10" HorizontalOptions="Center">
+                        <Image Source="island_empty.png" WidthRequest="270" HeightRequest="202" />
+                        <Label Text="No voyages yet" FontSize="22" FontAttributes="Bold" TextColor="{StaticResource Navy}"
+                               HorizontalTextAlignment="Center" />
+                        <Label Text="Short links you create will wash up here." Style="{StaticResource Hint}"
+                               HorizontalTextAlignment="Center" />
+                    </VerticalStackLayout>
+                </CollectionView.EmptyView>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="contracts:LinkResponse">
+                        <Border Style="{StaticResource Card}" Margin="0,7" Padding="0">
+                            <Grid ColumnDefinitions="8,*">
+                                <BoxView Background="{StaticResource CoralGradient}" />
+                                <Grid Grid.Column="1" Padding="16,14" ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto,Auto" RowSpacing="4">
+                                    <Label Text="{Binding ShortUrl}" FontSize="16" FontAttributes="Bold"
+                                           TextColor="{StaticResource Aegean}" LineBreakMode="TailTruncation" MaxLines="1" />
+                                    <Border Grid.Column="1" Background="{StaticResource CoralGradient}" Stroke="Transparent"
+                                            StrokeThickness="0" Padding="10,4" VerticalOptions="Start">
+                                        <Border.StrokeShape>
+                                            <RoundRectangle CornerRadius="14" />
+                                        </Border.StrokeShape>
+                                        <HorizontalStackLayout Spacing="5">
+                                            <Image Source="icon_clicks.png" WidthRequest="14" HeightRequest="14" VerticalOptions="Center" />
+                                            <Label Text="{Binding Clicks}" TextColor="White" FontAttributes="Bold" FontSize="13" />
+                                        </HorizontalStackLayout>
+                                    </Border>
+                                    <Label Grid.Row="1" Grid.ColumnSpan="2" Text="{Binding OriginalUrl}" Style="{StaticResource Hint}"
+                                           LineBreakMode="MiddleTruncation" MaxLines="1" />
+                                    <Label Grid.Row="2" Text="{Binding CreatedAt, StringFormat='{0:dd MMM yyyy}'}"
+                                           Style="{StaticResource Hint}" VerticalOptions="Center" />
+                                    <HorizontalStackLayout Grid.Row="2" Grid.Column="1" Spacing="2">
+                                        <ImageButton Source="icon_copy_blue.png" WidthRequest="38" HeightRequest="38" Padding="8"
+                                                     Command="{Binding Source={x:Reference HistoryRoot}, Path=BindingContext.CopyCommand}"
+                                                     CommandParameter="{Binding .}" />
+                                        <ImageButton Source="icon_open_blue.png" WidthRequest="38" HeightRequest="38" Padding="8"
+                                                     Command="{Binding Source={x:Reference HistoryRoot}, Path=BindingContext.OpenCommand}"
+                                                     CommandParameter="{Binding .}" />
+                                        <ImageButton Source="icon_trash.png" WidthRequest="38" HeightRequest="38" Padding="8"
+                                                     Command="{Binding Source={x:Reference HistoryRoot}, Path=BindingContext.DeleteCommand}"
+                                                     CommandParameter="{Binding .}" />
+                                    </HorizontalStackLayout>
+                                </Grid>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+    </Grid>
+</ContentPage>

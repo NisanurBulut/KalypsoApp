@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="Kalypso.Maui.Pages.ShortenPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Kalypso.Client.ViewModels;assembly=Kalypso.Client"
+             x:DataType="vm:ShortenViewModel"
+             Title="Shorten"
+             Shell.NavBarIsVisible="False">
+
+    <ScrollView>
+        <VerticalStackLayout>
+
+            <!-- Hero banner -->
+            <Grid Background="{StaticResource HeroGradient}"
+                  Padding="24,56,24,48"
+                  ColumnDefinitions="Auto,*"
+                  RowDefinitions="Auto,Auto"
+                  ColumnSpacing="16">
+                <Image Source="kalypso_logo.png" WidthRequest="68" HeightRequest="68"
+                       Grid.RowSpan="2" VerticalOptions="Center" />
+                <Label Grid.Column="1" Text="Kalypso" FontSize="34" FontAttributes="Bold" TextColor="White" VerticalOptions="End" />
+                <Label Grid.Column="1" Grid.Row="1" Text="Shorten links. Set sail." FontSize="15" TextColor="#BFF7F2" VerticalOptions="Start" />
+            </Grid>
+            <Image Source="wave_divider.png" Aspect="Fill" HeightRequest="30" Margin="0,-29,0,0" HorizontalOptions="Fill" />
+
+            <Grid Padding="20,0,20,28" MaximumWidthRequest="620" HorizontalOptions="Fill">
+                <VerticalStackLayout Spacing="18">
+
+                    <!-- Input card -->
+                    <Border Style="{StaticResource Card}" Padding="22" IsVisible="{Binding IsFormVisible}">
+                        <VerticalStackLayout Spacing="16">
+                            <Label Text="Paste your long link" Style="{StaticResource Heading}" />
+
+                            <Border Style="{StaticResource Field}">
+                                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                                    <Image Source="icon_link.png" WidthRequest="24" HeightRequest="24" VerticalOptions="Center" />
+                                    <Entry Grid.Column="1"
+                                           Text="{Binding Url}"
+                                           Placeholder="https://example.com/a/very/long/link"
+                                           Keyboard="Url"
+                                           ReturnType="Go"
+                                           ReturnCommand="{Binding ShortenCommand}"
+                                           ClearButtonVisibility="WhileEditing" />
+                                </Grid>
+                            </Border>
+
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Text="Choose my own name" VerticalOptions="Center" FontAttributes="Bold" />
+                                <Switch Grid.Column="1" IsToggled="{Binding UseCustomCode}"
+                                        OnColor="{StaticResource Turquoise}" ThumbColor="{StaticResource Coral}" />
+                            </Grid>
+
+                            <VerticalStackLayout Spacing="6" IsVisible="{Binding UseCustomCode}">
+                                <Border Style="{StaticResource Field}">
+                                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                                        <Image Source="icon_tag.png" WidthRequest="24" HeightRequest="24" VerticalOptions="Center" />
+                                        <Entry Grid.Column="1"
+                                               Text="{Binding CustomCode}"
+                                               Placeholder="my-summer-trip"
+                                               MaxLength="20"
+                                               ReturnType="Go"
+                                               ReturnCommand="{Binding ShortenCommand}" />
+                                    </Grid>
+                                </Border>
+                                <Label Text="4 to 20 letters, numbers, - or _" Style="{StaticResource Hint}" />
+                            </VerticalStackLayout>
+
+                            <Label Text="{Binding ErrorMessage}" IsVisible="{Binding HasError}"
+                                   TextColor="{StaticResource Coral}" FontAttributes="Bold" />
+
+                            <Button Text="Shorten it" Command="{Binding ShortenCommand}" Style="{StaticResource GradientButton}" />
+                            <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"
+                                               Color="{StaticResource Aegean}" HeightRequest="28" />
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <!-- Result card -->
+                    <Border Background="{StaticResource ResultGradient}" Stroke="Transparent" StrokeThickness="0"
+                            Padding="22" IsVisible="{Binding HasResult}">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="28" />
+                        </Border.StrokeShape>
+                        <Border.Shadow>
+                            <Shadow Brush="#7B2FF7" Offset="0,10" Radius="24" Opacity="0.35" />
+                        </Border.Shadow>
+
+                        <VerticalStackLayout Spacing="14">
+                            <Label Text="Your short link is ready!" FontSize="14" FontAttributes="Bold" TextColor="#D9FFFB" />
+                            <Label Text="{Binding Result.ShortUrl}" FontSize="22" FontAttributes="Bold" TextColor="White"
+                                   LineBreakMode="CharacterWrap" />
+                            <Label Text="{Binding Result.OriginalUrl}" FontSize="12" TextColor="#E4EDFF"
+                                   LineBreakMode="MiddleTruncation" MaxLines="1" />
+
+                            <Grid ColumnDefinitions="*,*,*" ColumnSpacing="12" Margin="0,6,0,0">
+                                <Button Text="Copy" ImageSource="icon_copy.png" Command="{Binding CopyCommand}" Style="{StaticResource GlassButton}" />
+                                <Button Grid.Column="1" Text="Share" ImageSource="icon_share.png" Command="{Binding ShareCommand}" Style="{StaticResource GlassButton}" />
+                                <Button Grid.Column="2" Text="Open" ImageSource="icon_open.png" Command="{Binding OpenCommand}" Style="{StaticResource GlassButton}" />
+                            </Grid>
+
+                            <Label Text="{Binding StatusMessage}" IsVisible="{Binding HasStatus}"
+                                   HorizontalOptions="Center" FontAttributes="Bold" TextColor="White" />
+
+                            <Border BackgroundColor="White" Stroke="Transparent" StrokeThickness="0" Padding="12"
+                                    HorizontalOptions="Center" Margin="0,4,0,0">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="20" />
+                                </Border.StrokeShape>
+                                <Image Source="{Binding QrPng, Converter={StaticResource BytesToImage}}"
+                                       WidthRequest="170" HeightRequest="170" />
+                            </Border>
+                            <Label Text="Scan with a phone camera" FontSize="12" TextColor="#E4EDFF" HorizontalOptions="Center" />
+
+                            <Button Text="Shorten another link" Command="{Binding NewLinkCommand}"
+                                    BackgroundColor="Transparent" BorderColor="White" BorderWidth="2"
+                                    TextColor="White" FontAttributes="Bold" CornerRadius="24" HeightRequest="48" />
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <!-- Footer tagline -->
+                    <Label Text="Named after Calypso, who kept Odysseus on her island for seven years. Your links stay shorter."
+                           Style="{StaticResource Hint}" HorizontalTextAlignment="Center" Margin="12,4" />
+                </VerticalStackLayout>
+            </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
